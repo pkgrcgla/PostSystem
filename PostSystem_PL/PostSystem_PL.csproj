@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PostSystem_BL\PostSystem_BL.csproj" />
     <ProjectReference Include="..\PostSystem_DL\PostSystem_DL.csproj" />
   </ItemGroup>
 
