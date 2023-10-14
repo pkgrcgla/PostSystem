@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace PostSystem_EL.Entities
 {
     [Table("POSTMEDIA")]
-    public class PostMedia: BaseNumeric<int>
+    public class PostMedia: BaseNumeric<long>
     {
         public string MediaPath { get; set; }
         public long PostId { get; set; }

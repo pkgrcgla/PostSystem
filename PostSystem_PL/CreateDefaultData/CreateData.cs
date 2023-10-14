@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
 using PostSystem_BL.EmailSenderProcess;
+using PostSystem_DL.ContextInfo;
 using PostSystem_EL.IdentityModels;
 using PostSystem_UL;
 using Serilog.Core;
@@ -22,7 +22,7 @@ namespace PostSystem_PL.CreateDefaultData
             var emailManager = serviceProvider.GetRequiredService<IEmailManager>();
 
             //var userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
-            var context = serviceProvider.GetService<AddressbookContext>();
+            var context = serviceProvider.GetService<PostSystemContext>();
             var configuration = serviceProvider.GetService<IConfiguration>();// appsettings.json dosyasına ulaşmak için
 
 

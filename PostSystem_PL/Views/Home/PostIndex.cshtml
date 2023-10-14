@@ -1,0 +1,81 @@
+﻿@model PostIndexVM
+@{
+    ViewData["Title"] = "PostIndex";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+@if (TempData["PostIndexSuccessMsg"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>BİLGİ!</strong> @TempData["PostIndexSuccessMsg"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <br />
+}
+
+<div class="container bg-white pt-5">
+
+
+        <form asp-controller="Home" asp-action="PostIndex" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="UserId" />
+        <div class="col-md-12 pb-5">
+            <div class="control-group">
+                <h3>Post Ekle</h3>
+                <div class="control-group">
+                    <textarea class="form-control" rows="4" placeholder="Message" asp-for="Post" id="postmessage"></textarea>
+                    <span style="float:right"
+                          class="badge bg-secondary" id="postmessagebadge"></span>
+                    <p class="help-block text-danger"></p>
+               
+                <input type="file" asp-for="PostPictures"  multiple accept=".png,.jpg,.jpeg"/>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary" type="submit">Gönder</button>
+            </div>
+           
+        </div>    
+    </form>
+
+
+   
+  @*  @foreach(var item in Model)
+    {
+           
+    }
+
+     <div class="row blog-item px-3 pb-5">
+
+        <div class="col-md-7">
+            <h4 @item.AppUser class="bg-white font-weight-bold">Username gelecek</h4>
+            <div class="d-flex mb-3">
+                <small class="mr-2 text-muted">Post Tarihi gelecel</small>
+                <small class="mr-2 text-muted"> Kaç dk önce paylaştı</small>
+            </div>
+            <p>
+                Tweet içeriği
+            </p>
+            <img class="img-fluid mb-4 mb-md-0" src="/Template/img/blog-2.jpg" alt="Image">
+        </div>
+    </div> 
+
+</div> *@
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#postmessage").keyup(function () {
+                var characterCount = $("#postmessage").val().length;
+                var x = characterCount + "/500";
+                $("#postmessagebadge").text(x);
+                // document.getElementById("postmessagebadge").innerText = x;
+                console.log(x);
+            });
+
+
+        }); // document ready bitti
+
+
+    </script>
+}

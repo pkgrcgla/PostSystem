@@ -1,3 +1,5 @@
+using AutoMapper.Extensions.ExpressionMapping;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PostSystem_BL.EmailSenderProcess;
 using PostSystem_BL.ImplementationOfManagers;
@@ -5,6 +7,11 @@ using PostSystem_BL.InterfacesOfManagers;
 using PostSystem_DL.ContextInfo;
 using PostSystem_DL.ImplementationsOfRepos;
 using PostSystem_DL.InterfaceOfRepos;
+using PostSystem_EL.IdentityModels;
+using PostSystem_EL.Mappings;
+using PostSystem_EL.ViewModels;
+using PostSystem_PL.CreateDefaultData;
+using PostSystem_PL.Models;
 using Serilog;
 using System.Globalization;
 
@@ -35,6 +42,27 @@ builder.Services.AddDbContext<PostSystemContext>(options =>
 
 });
 
+//appuser ve approle identity ayari
+builder.Services.AddIdentity<AppUser, AppRole>(opt =>
+{
+    opt.Password.RequiredLength = 8;
+    opt.Password.RequireNonAlphanumeric = true;
+    opt.Password.RequireLowercase = true;
+    opt.Password.RequireUppercase = true;
+    opt.Password.RequireDigit = true;
+    opt.User.RequireUniqueEmail = true;
+    //opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+&%";
+
+}).AddDefaultTokenProviders().AddEntityFrameworkStores<PostSystemContext>();
+
+//automapper ayari 
+builder.Services.AddAutoMapper(a =>
+{
+    a.AddExpressionMapping();
+    a.AddProfile(typeof(Maps));
+    a.CreateMap<PostIndexVM, UserPostDTO>().ReverseMap();
+});
+
 //interfacelerin DI yasam dongusu
 builder.Services.AddScoped<IEmailManager, EmailManager>();
 
@@ -44,11 +72,8 @@ builder.Services.AddScoped<IUserPostManager, UserPostManager>();
 builder.Services.AddScoped<IPostTagRepo, PostTagRepo>();
 builder.Services.AddScoped<IPostTagManager, PostTagManager>();
 
-builder.Services.AddScoped<IPostMediaRepo, PostTagRepo>();
+builder.Services.AddScoped<IPostMediaRepo, PostMediaRepo>();
 builder.Services.AddScoped<IPostMediaManager, PostMediaManager>();
-
-
-
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -68,10 +93,23 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication(); //login logout
+app.UseAuthorization();//yetki
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+//Sistem ilk ayaga kalktiginnda rolleri ekleyelim
+//ADMIN, MEMBER, WAITINGFORACTIVATION, PASSIVE
+
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+
+    CreateData c = new CreateData(logger);
+    c.CreateRoles(serviceProvider);
+
+
+}
 app.Run();

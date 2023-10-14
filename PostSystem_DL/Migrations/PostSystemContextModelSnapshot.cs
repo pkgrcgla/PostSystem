@@ -130,12 +130,12 @@ namespace PostSystem_DL.Migrations
 
             modelBuilder.Entity("PostSystem_EL.Entities.PostMedia", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .HasColumnOrder(1);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("InsertedDate")
                         .HasColumnType("datetime2")
@@ -157,12 +157,12 @@ namespace PostSystem_DL.Migrations
 
             modelBuilder.Entity("PostSystem_EL.Entities.PostTag", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .HasColumnOrder(1);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("InsertedDate")
                         .HasColumnType("datetime2")

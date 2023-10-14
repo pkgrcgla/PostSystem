@@ -31,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PostSystem_BL\PostSystem_BL.csproj" />
     <ProjectReference Include="..\PostSystem_DL\PostSystem_DL.csproj" />
+    <ProjectReference Include="..\PostSystem_UL\PostSystem_UL.csproj" />
   </ItemGroup>
 
 </Project>

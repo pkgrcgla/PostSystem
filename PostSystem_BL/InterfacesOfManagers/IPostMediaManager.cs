@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PostSystem_BL.InterfacesOfManagers
 {
-    public interface IPostMediaManager:IManager<PostMediaDTO,int>
+    public interface IPostMediaManager:IManager<PostMediaDTO, long>
     {
     }
 }

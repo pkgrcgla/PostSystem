@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PostSystem_DL.InterfaceOfRepos
 {
-    public interface IPostTagRepo: IRepository<PostTag,int>
+    public interface IPostTagRepo: IRepository<PostTag,long>
     {
     }
 }

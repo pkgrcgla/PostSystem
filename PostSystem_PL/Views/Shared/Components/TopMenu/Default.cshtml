@@ -1,0 +1,26 @@
+﻿@model AppUser?
+
+<!-- Navbar Start -->
+<div class="container p-0">
+    <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
+        <a href="" class="navbar-brand d-block d-lg-none">Navigation</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav m-auto">
+                 @if (!string.IsNullOrEmpty(Model?.UserName))
+                {
+                    <a asp-controller="Home" asp-action="PostIndex" class="nav-item nav-link">Anasayfa</a>
+                    <a  asp-controller="Account" asp-action="Logout" class="nav-item nav-link">Çıkış Yap</a>
+                }
+                else
+                {
+                    <a asp-controller="Home" asp-action="Index" class="nav-item nav-link">Anasayfa</a>
+                    <a asp-controller="Account" asp-action="Login" class="nav-item nav-link">Giriş Yap</a>
+                }
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- Navbar End -->  

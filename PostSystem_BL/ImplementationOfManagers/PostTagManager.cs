@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PostSystem_BL.InterfacesOfManagers;
 using PostSystem_DL.InterfaceOfRepos;
 using PostSystem_EL.Entities;
 using PostSystem_EL.ViewModels;
@@ -10,10 +11,11 @@ using System.Threading.Tasks;
 
 namespace PostSystem_BL.ImplementationOfManagers
 {
-    public class PostTagManager : Manager<PostTagDTO, PostTagDTO, int>
+    public class PostTagManager : Manager<PostTagDTO, PostTag, long>,IPostTagManager
     {
-        public PostTagManager(IRepository<PostTagDTO, int> repo, IMapper mapper) : base(repo, mapper, new string[] { "UserPost"})
+        public PostTagManager(IPostTagRepo repo, IMapper mapper) : base(repo, mapper, new string[] { "UserPost" })
         {
+
         }
     }
 }

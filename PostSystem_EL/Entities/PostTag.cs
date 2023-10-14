@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PostSystem_EL.Entities
 {
     [Table("POSTTAG")]
-    public class PostTag: BaseNumeric<int>
+    public class PostTag: BaseNumeric<long>
     {
         public string Tag { get; set; } 
         public long PostId { get; set; }

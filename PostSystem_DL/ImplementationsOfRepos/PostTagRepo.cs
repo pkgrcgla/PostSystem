@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PostSystem_DL.ImplementationsOfRepos
 {
-    public class PostTagRepo : Repository<PostTag, int>, IPostTagRepo
+    public class PostTagRepo : Repository<PostTag, long>, IPostTagRepo
     {
         public PostTagRepo(PostSystemContext context) : base(context)
         {

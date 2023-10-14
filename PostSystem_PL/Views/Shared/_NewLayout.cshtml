@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Bloggy - Personal Blog Template</title>
+
+    <!-- Favicon -->
+    <link href="~/Template/img/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/Template/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            @await Component.InvokeAsync("SideMenu")
+        </div>
+        <div class="content">
+            <header>
+                @await Component.InvokeAsync("TopMenu")
+            </header>         
+            <!-- Blog List Start -->
+            <div class="container bg-white pt-5">
+              @RenderBody()
+            </div>
+            <!-- Blog List End -->
+            <!-- Footer Start -->
+            <div class="container py-4 bg-secondary text-center">
+                <p class="m-0 text-white">
+                    &copy; <a class="text-white font-weight-bold" href="#">Post Site</a>. All Rights Reserved. Designed by Çağla Nur Pakgör
+                </p>
+            </div>
+            <!-- Footer End -->
+        </div>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Template/lib/easing/easing.min.js"></script>
+    <script src="~/Template/lib/waypoints/waypoints.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="~/Template/mail/jqBootstrapValidation.min.js"></script>
+    <script src="~/Template/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="~/Template/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

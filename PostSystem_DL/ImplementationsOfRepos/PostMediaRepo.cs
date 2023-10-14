@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PostSystem_DL.ImplementationsOfRepos
 {
-    public class PostMediaRepo : Repository<PostMedia, int>, IPostMediaRepo
+    public class PostMediaRepo : Repository<PostMedia, long>, IPostMediaRepo
     {
         public PostMediaRepo(PostSystemContext context) : base(context)
         {

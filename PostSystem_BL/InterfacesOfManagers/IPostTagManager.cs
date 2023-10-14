@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PostSystem_BL.InterfacesOfManagers
 {
-    public interface IPostTagManager:IManager<PostTagDTO,int>
+    public interface IPostTagManager:IManager<PostTagDTO, long>
     {
     }
 }

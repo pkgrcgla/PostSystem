@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PostSystem_BL.InterfacesOfManagers;
 using PostSystem_DL.ImplementationsOfRepos;
 using PostSystem_DL.InterfaceOfRepos;
 using PostSystem_EL.Entities;
@@ -11,10 +12,11 @@ using System.Threading.Tasks;
 
 namespace PostSystem_BL.ImplementationOfManagers
 {
-    public class PostMediaManager : Manager<PostMediaDTO, PostMedia, int>
+    public class PostMediaManager : Manager<PostMediaDTO, PostMedia, long>,IPostMediaManager
     {
-        public PostMediaManager(IRepository<PostMedia, int> repo, IMapper mapper) : base(repo, mapper, new string[]{ "UserPost" })
+        public PostMediaManager(IPostMediaRepo repo, IMapper mapper) : base(repo, mapper, new string[] { "UserPost" })
         {
+
         }
     }
 }

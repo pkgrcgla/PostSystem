@@ -1,8 +1,37 @@
-﻿@{
+﻿@model List<PostIndexVM>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Blog List Start -->
+<div class="container bg-white pt-5">
+    @foreach(var item in Model)
+    {
+    <div class="row blog-item px-3 pb-5">
+            <div class="col-1">
+                <img src="~/profilepicture.jpg" style="width:50px; height:50px;" />
+            </div>
+        <div class="col-md-7">
+                <label>
+                    @item.AppUser.Name @item.AppUser.Surname @Html.Raw("@")<span style="font-style:italic"> @item.AppUser.UserName</span>
+                      @{
+                var span = new TimeSpan();
+                span = DateTime.Now - item.InsertedDate;
+            }
+            <div class="d-flex mb-3">
+                        <small class="mr-2 text-muted"> @Math.Round(span.TotalHours) sa</small>
+            </div>
+            <p>
+                        @item.Post
+            </p>
+                    @foreach (var media in item.PostMedias)
+                    {
+                        
+                    <img src="@media.MediaPath" class="img-fluid mb-4 mb-md-0" alt="Image">
+                    }
+        </div>
+    </div>
+    }
+   
 </div>
+<!-- Blog List End -->
