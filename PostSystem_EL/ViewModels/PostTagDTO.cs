@@ -9,10 +9,10 @@ namespace PostSystem_EL.ViewModels
 {
     public class PostTagDTO
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public DateTime InsertedDate { get; set; }
         public string Tag { get; set; }
-        public int PostId { get; set; }
+        public long PostId { get; set; }
         public UserPost? UserPost { get; set; }
     }
 }

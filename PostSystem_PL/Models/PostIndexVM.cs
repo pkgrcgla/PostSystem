@@ -6,15 +6,13 @@ namespace PostSystem_PL.Models
 {
     public class PostIndexVM
     {
+        public long Id { get; set; }
+
         [StringLength(500)]
         [MinLength(2)]
-
-        public long Id { get; set; }
         public string Post { get; set; }
 
         public string UserId { get; set; }
-
-        public bool IsDefaultPost { get; set; } // ekstra
 
         public bool IsDeleted { get; set; }
 

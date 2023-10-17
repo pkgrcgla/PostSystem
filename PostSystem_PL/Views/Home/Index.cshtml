@@ -19,15 +19,15 @@
                 span = DateTime.Now - item.InsertedDate;
             }
             <div class="d-flex mb-3">
-                        <small class="mr-2 text-muted"> @Math.Round(span.TotalHours) sa</small>
+                <small class="mr-2 text-muted"> @Math.Round(span.TotalHours) sa</small>
             </div>
             <p>
                         @item.Post
             </p>
                     @foreach (var media in item.PostMedias)
                     {
-                        
-                    <img src="@media.MediaPath" class="img-fluid mb-4 mb-md-0" alt="Image">
+
+                        <img src="@media.MediaPath" style="width:150px; height:150px; class="img-fluid mb-4 mb-md-0" alt="Image">
                     }
         </div>
     </div>
@@ -35,3 +35,4 @@
    
 </div>
 <!-- Blog List End -->
+

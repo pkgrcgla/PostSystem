@@ -42,15 +42,13 @@ namespace PostSystem_PL.Controllers
                 {
                     post.PostMedias.Add(item);
                 }
-
-
             }
             return View(model);
         }
         [Authorize]
         public IActionResult PostIndex()
         {
-            //useridyi sayfaya gönderelim böylece adres eklemede useridyi metoda aktarabiliriz
+            //useridyi sayfaya gönderelim böylece post eklemede useridyi metoda aktarabiliriz
             var username = User.Identity?.Name;
             var user = _userManager.FindByNameAsync(username).Result;
             PostIndexVM model = new PostIndexVM();
@@ -107,6 +105,7 @@ namespace PostSystem_PL.Controllers
                                 {
                                     PostId = (int)result.Data.Id,
                                     MediaPath = $"/PostPictures/{fileName}{uzanti}"
+
                                 };
                                 _postMediaManager.Add(p);
 
@@ -115,6 +114,8 @@ namespace PostSystem_PL.Controllers
                 }
                 TempData["PostIndexSuccessMsg"] = "Post attınız!";
                 _logger.LogInformation($"Home/PostIndex atılan Post: {JsonConvert.SerializeObject(model)}");
+
+
                 return RedirectToAction("PostIndex", "Home");
             }
             catch (Exception ex) 
@@ -125,7 +126,5 @@ namespace PostSystem_PL.Controllers
             }
             return View();
         }
-
-
     }
 }

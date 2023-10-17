@@ -11,7 +11,9 @@
             <div class="navbar-nav m-auto">
                  @if (!string.IsNullOrEmpty(Model?.UserName))
                 {
-                    <a asp-controller="Home" asp-action="PostIndex" class="nav-item nav-link">Anasayfa</a>
+                    <a asp-controller="Home" asp-action="Index" class="nav-item nav-link">Anasayfa</a>
+                    <a asp-controller="Home" asp-action="PostIndex" class="nav-item nav-link">Post Ekle</a>
+                    <a asp-controller="Account" asp-action="Profile" class="nav-item nav-link">Profilim</a>
                     <a  asp-controller="Account" asp-action="Logout" class="nav-item nav-link">Çıkış Yap</a>
                 }
                 else
