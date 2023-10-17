@@ -268,5 +268,100 @@ namespace PostSystem_PL.Controllers
                 return RedirectToAction("Login");
             }
         }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult Profile() 
+        {
+            try
+            {
+                //sisteme giriş yapmış kişinin bilgileri
+                var username = User.Identity?.Name;
+                var user = _userManager.FindByNameAsync(username).Result;
+                var models= _mapper.Map<AppUser,ProfileViewModel>(user);
+                var model = _mapper.Map<AppUser, ProfileViewModel>(user);
+         
+                return View(models);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "HATA: Account/Profile");
+                return View(new ProfileViewModel());
+
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Profile(ProfileViewModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                //user bilgileri
+                var username = User.Identity?.Name;
+                var user = _userManager.FindByNameAsync(username).Result;
+                user.Name = model.Name;
+                user.Surname = model.Surname;
+                user.BirthDate = model.BirthDate;
+                ViewBag.ProfilePageMsg = string.Empty;
+                if (model.ChosenPicture != null &&
+                    model.ChosenPicture.ContentType.Contains("image") && model.ChosenPicture.Length > 0)
+                {
+                    string fileName = $"{model.ChosenPicture.FileName.Substring(0, model.ChosenPicture.FileName.IndexOf('.'))}-{Guid.NewGuid().ToString().Replace("-", "")}";
+
+                    string uzanti = Path.GetExtension(model.ChosenPicture.FileName);
+
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/ProfilePictures/{fileName}{uzanti}");
+
+                    string directoryPath =
+                       Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/ProfilePictures/");
+
+                    if (!Directory.Exists(directoryPath))
+                        Directory.CreateDirectory(directoryPath);
+
+                    using var stream = new FileStream(path, FileMode.Create);
+
+                    model.ChosenPicture.CopyTo(stream);
+                    user.ProfilePicture = $"/ProfilePictures/{fileName}{uzanti}";
+                    ViewBag.ProfilePageMsg = "Profil resmi yüklendi.";
+                }
+
+                else if (model.ChosenPicture != null &&
+                    !model.ChosenPicture.ContentType.Contains("image"))
+                {
+                    ModelState.AddModelError("", "Lütfen seçtiğiniz profil resminin png, jpg ... uzantılı olması gerekir!");
+
+                }
+
+                var result = _userManager.UpdateAsync(user).Result;
+                if (result.Succeeded)
+                {
+                    ViewBag.ProfilePageMsg += "Bilgiler güncellendi";
+
+                    return View(_mapper.Map<AppUser, ProfileViewModel>(user));
+
+                }
+                else
+                {
+                    ViewBag.ProfilePageMsg = "Bilgiler güncellenemedi! Tekrar deneyiniz!";
+                    return View(model);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "HATA: Home/Profile Post");
+                ModelState.AddModelError("", "Beklenmedik bir hata oluştu!");
+                return View(model);
+
+            }
+        }
+
     }
 }

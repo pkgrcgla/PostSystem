@@ -61,6 +61,8 @@ builder.Services.AddAutoMapper(a =>
     a.AddExpressionMapping();
     a.AddProfile(typeof(Maps));
     a.CreateMap<PostIndexVM, UserPostDTO>().ReverseMap();
+    a.CreateMap<AppUser, ProfileViewModel>();
+
 });
 
 //interfacelerin DI yasam dongusu

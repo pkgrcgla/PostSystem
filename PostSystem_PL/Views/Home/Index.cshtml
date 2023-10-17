@@ -9,7 +9,7 @@
     {
     <div class="row blog-item px-3 pb-5">
             <div class="col-1">
-                <img src="~/profilepicture.jpg" style="width:50px; height:50px;" />
+                <img src="@item.AppUser.ProfilePicture" style="width:50px; height:50px; border-radius: 50%;" />
             </div>
         <div class="col-md-7">
                 <label>
@@ -27,7 +27,7 @@
                     @foreach (var media in item.PostMedias)
                     {
 
-                        <img src="@media.MediaPath" style="width:150px; height:150px; class="img-fluid mb-4 mb-md-0" alt="Image">
+                        <img src="@media.MediaPath" style="width: 100%; max-width: 400px; height: auto;" class="img-fluid mb-4 mb-md-0" alt="Image">
                     }
         </div>
     </div>
